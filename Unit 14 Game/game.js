@@ -1,6 +1,9 @@
 let player1;
 let player2;
 let player3;
+var bomb;
+let bombGroup;
+
 
 
 
@@ -59,6 +62,7 @@ function move(){
 
 function setup() {
   canvas = createCanvas(800,800)
+  bombGroup = new Group();
   player1 = createPlayer(player1_img)
   player1.scale = 0.5
   player1.position.x = 40
@@ -74,9 +78,28 @@ function setup() {
   player3.position.x = 750
   player3.position.y = 760
   player3.friction = 0.04
+  bomb1 = createBomb(bombs_img)
+  bomb1.position.x = random(0,800)
+  bomb1.position.y = 0
+  bomb2 = createBomb(bombs_img)
+  bomb2.position.x = random(0,800)
+  bomb2.position.y = 0
+  bomb3 = createBomb(bombs_img)
+  bomb3.position.x = 0
+  bomb3.position.y = 0
+  bomb4 = createBomb(bombs_img)
+  bomb4.position.x = random(0,800)
+  bomb4.position.y = 0
+  bomb5 = createBomb(bombs_img)
+  bomb5.position.x = random(0,800)
+  bomb5.position.y = 0
+
+
+
+
 }
 
-function canvasCollisionDetection(sprite){
+function canvasCollision(sprite){
   if (sprite.position.x < 0) { //off left of window
     sprite.position.x = canvas.width;
   }
@@ -85,16 +108,28 @@ function canvasCollisionDetection(sprite){
   }
 }
 
-function bombs(){
+function bombCanvasCollision(sprite){
+  if (sprite.position.y > 100) { //off bottom of canvas
+    sprite.position.y += 20
+  }
+}
 
+
+function createBomb(sprite){
+  bomb = createSprite()
+  bomb.addImage(sprite)
+  bomb.scale = 0.2
+  bombGroup.add(bomb)
+  return bomb
 }
 
 function draw() {
 background(0);
 move()
-canvasCollisionDetection(player1)
-canvasCollisionDetection(player2)
-canvasCollisionDetection(player3)
+canvasCollision(player1)
+canvasCollision(player2)
+canvasCollision(player3)
+bombCanvasCollision(bomb1)
 
 
 
@@ -102,3 +137,4 @@ canvasCollisionDetection(player3)
 
 drawSprites();
 }
+ /* create collision rule on ball group */

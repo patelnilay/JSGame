@@ -16,5 +16,22 @@ canvas {
     margin-right: auto;
     display: block;
     border: 3px inset #f0932b;
-
 }
+
+h1{
+  text-align: center;
+  color: #badc58;
+}
+
+h3{
+  padding-left: 20%;
+  color: #badc58;
+}
+
+ul{
+  list-style: bullet;
+  padding-left: 20%;
+}
+ p{
+   text-align: center;
+ }
