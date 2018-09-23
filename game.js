@@ -3,8 +3,8 @@ let player2;
 let player3;
 var bomb;
 let bombGroup;
-
-
+let bombSpeed;
+let playerGroup;
 
 
 function preload(){
@@ -17,10 +17,11 @@ function preload(){
 function createPlayer(sprite){
   player = createSprite()
   player.addImage(sprite)
+  playerGroup.add(player)
   return player
 }
 
-//allows players to move, assigned to arrows keys, [W.A.S.D] keys and [O,K,L,;] keys
+//allows players to move, assigned to arrows keys, [W.D] keys and [J,L,] keys
 function move(){
   let speed = 0.3
   let maxSpeed = 2
@@ -34,6 +35,7 @@ function move(){
 
   }
 
+// the numebr represents a key in the keyboard
   if (keyIsDown(65)) {
     player2.addSpeed(speed, 180);
 
@@ -63,9 +65,10 @@ function move(){
 function setup() {
   canvas = createCanvas(800,800)
   bombGroup = new Group();
+  playerGroup = new Group();
   player1 = createPlayer(player1_img)
   player1.scale = 0.5
-  player1.position.x = 40
+  player1.position.x = 0
   player1.position.y = 760
   player1.friction = 0.04;
   player2 = createPlayer(player2_img)
@@ -78,21 +81,38 @@ function setup() {
   player3.position.x = 750
   player3.position.y = 760
   player3.friction = 0.04
-  bomb1 = createBomb(bombs_img)
+  bomb1 = createBomb(bombs_img);
   bomb1.position.x = random(0,800)
-  bomb1.position.y = 0
-  bomb2 = createBomb(bombs_img)
+  bomb1.position.y = 20;
+  bomb1.friction = 1;
+  bomb2 = createBomb(bombs_img);
   bomb2.position.x = random(0,800)
-  bomb2.position.y = 0
-  bomb3 = createBomb(bombs_img)
-  bomb3.position.x = 0
-  bomb3.position.y = 0
-  bomb4 = createBomb(bombs_img)
+  bomb2.position.y = 130;
+  bomb2.friction = 1;
+  bomb3 = createBomb(bombs_img);
+  bomb3.position.x = random(0,800)
+  bomb3.position.y = 0;
+  bomb3.friction = 1;
+  bomb4 = createBomb(bombs_img);
   bomb4.position.x = random(0,800)
-  bomb4.position.y = 0
-  bomb5 = createBomb(bombs_img)
+  bomb4.position.y = 0;
+  bomb4.friction = 1;
+  bomb5 = createBomb(bombs_img);
   bomb5.position.x = random(0,800)
-  bomb5.position.y = 0
+  bomb5.position.y = 0;
+  bomb5.friction = 1;
+  bomb6 = createBomb(bombs_img);
+  bomb6.position.x = random(0,800)
+  bomb6.position.y = 0;
+  bomb6.friction = 1;
+  bomb7 = createBomb(bombs_img);
+  bomb7.position.x = random(0,800)
+  bomb7.position.y = 0;
+  bomb7.friction = 1;
+  bomb8 = createBomb(bombs_img);
+  bomb8.position.x = random(0,800)
+  bomb8.position.y = 0;
+  bomb8.friction = 1;
 
 
 
@@ -109,32 +129,52 @@ function canvasCollision(sprite){
 }
 
 function bombCanvasCollision(sprite){
-  if (sprite.position.y > 100) { //off bottom of canvas
-    sprite.position.y += 20
+  if (sprite.position.y > 800) { //off bottom of canvas
+    sprite.position.x = random(0,800)
+    sprite.position.y = 0
   }
 }
 
+//collision against bomb and player
+function bombPlayerCollision(sprite){
+  sprite.remove()
+}
 
 function createBomb(sprite){
   bomb = createSprite()
   bomb.addImage(sprite)
-  bomb.scale = 0.2
+  bomb.scale = 0.3;
   bombGroup.add(bomb)
   return bomb
 }
 
+function bombFall(sprite){
+
+  sprite.position.y += 4.5
+  }
+
 function draw() {
-background(0);
+background("#232323");
+bombCanvasCollision(bomb1)
+bombCanvasCollision(bomb2)
+bombCanvasCollision(bomb3)
+bombCanvasCollision(bomb4)
+bombCanvasCollision(bomb5)
+bombCanvasCollision(bomb6)
+bombCanvasCollision(bomb7)
+bombCanvasCollision(bomb8)
+bombFall(bomb1)
+bombFall(bomb2)
+bombFall(bomb3)
+bombFall(bomb4)
+bombFall(bomb5)
+bombFall(bomb6)
+bombFall(bomb7)
+bombFall(bomb8)
+playerGroup.overlap(bombGroup, bombPlayerCollision)
 move()
 canvasCollision(player1)
 canvasCollision(player2)
 canvasCollision(player3)
-bombCanvasCollision(bomb1)
-
-
-
-
-
 drawSprites();
 }
- /* create collision rule on ball group */
