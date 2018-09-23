@@ -8,10 +8,10 @@ let bombGroup;
 
 
 function preload(){
-  player1_img = loadImage("Emojis/1f435.png");
-  player2_img = loadImage("Emojis/1f436.png");
-  player3_img = loadImage("Emojis/1f439.png");
-  bombs_img = loadImage("Emojis/1f525.png");
+  player1_img = loadImage("Unit 14 Game/Emojis/1f435.png");
+  player2_img = loadImage("Unit 14 Game/Emojis/1f436.png");
+  player3_img = loadImage("Unit 14 Game/Emojis/1f439.png");
+  bombs_img = loadImage("Unit 14 Game/Emojis/1f525.png");
 }
 // function that creates players, in order to use cretae player
 function createPlayer(sprite){
