@@ -5,7 +5,15 @@ var bomb;
 let bombGroup;
 let bombSpeed;
 let playerGroup;
+let endNextFrame;
+let gameState;
 
+
+function winCondition(sprite){
+  if (playerGroup.length == 1) {
+    endNextFrame = 1
+  }
+}
 
 function preload(){
   player1_img = loadImage("Emojis/1f435.png");
@@ -60,12 +68,14 @@ function move(){
 }
 
 
-
-
 function setup() {
   canvas = createCanvas(800,800)
   bombGroup = new Group();
   playerGroup = new Group();
+  gameState = 1
+  if (gameState == 1){
+    alert("Press OK to start the game")
+  }
   player1 = createPlayer(player1_img)
   player1.scale = 0.5
   player1.position.x = 0
@@ -155,6 +165,14 @@ function bombFall(sprite){
 
 function draw() {
 background("#232323");
+if (endNextFrame == 1){
+  alert("Winner!!!!!" )
+  endNextFrame = 0
+  gameState = 2
+  if (gameState == 2){
+  window.location.reload(true)
+  }
+}
 bombCanvasCollision(bomb1)
 bombCanvasCollision(bomb2)
 bombCanvasCollision(bomb3)
@@ -177,4 +195,7 @@ canvasCollision(player1)
 canvasCollision(player2)
 canvasCollision(player3)
 drawSprites();
+if (gameState != 2){
+    winCondition()}
+  drawSprites();
 }
