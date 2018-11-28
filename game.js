@@ -69,7 +69,7 @@ function move(){
 
 
 function setup() {
-  canvas = createCanvas(800,800)
+  canvas = createCanvas(800,600)
   bombGroup = new Group();
   playerGroup = new Group();
   gameState = 1
@@ -79,17 +79,17 @@ function setup() {
   player1 = createPlayer(player1_img)
   player1.scale = 0.5
   player1.position.x = 0
-  player1.position.y = 760
+  player1.position.y = 560
   player1.friction = 0.04;
   player2 = createPlayer(player2_img)
   player2.scale = 0.5
   player2.position.x = 400
-  player2.position.y = 760
+  player2.position.y = 560
   player2.friction = 0.04;
   player3 = createPlayer(player3_img)
   player3.scale = 0.5
   player3.position.x = 750
-  player3.position.y = 760
+  player3.position.y = 560
   player3.friction = 0.04
   bomb1 = createBomb(bombs_img);
   bomb1.position.x = random(0,800)
